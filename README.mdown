@@ -1,9 +1,7 @@
 ALToastView
 ------------
 
-ALToastView provides Android's Toast message for iOS.
-
-[![ALToastView Screenshot](http://d.pr/EyAp+ "ALToastView Screenshot")](http://d.pr/eX39+)
+ALToastView provides Android's Toast message for iOS ([Screenshot](http://d.pr/eX39+)).
 
 Requires iOS SDK 4.0 or higher
 

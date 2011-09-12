@@ -126,7 +126,8 @@ static NSMutableArray *toasts;
 
 - (void)fadeToastOut {
 	// Fade in parent view
-  [UIView animateWithDuration:.3 
+  [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionAllowUserInteraction
+   
                    animations:^{
                      self.alpha = 0.f;
                    } 
@@ -152,9 +153,10 @@ static NSMutableArray *toasts;
     
 		// Fade into parent view
 		[parentView addSubview:view];
-    [UIView animateWithDuration:.5 animations:^{
+    [UIView animateWithDuration:.5  delay:0 options:UIViewAnimationOptionAllowUserInteraction
+                     animations:^{
       view.alpha = 1.0;
-    }];
+                     } completion:^(BOOL finished){}];
     
     // Start timer for fade out
     [view performSelector:@selector(fadeToastOut) withObject:nil afterDelay:kDuration];

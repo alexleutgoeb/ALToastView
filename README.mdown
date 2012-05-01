@@ -5,10 +5,13 @@ ALToastView provides Android's Toast message for iOS ([Screenshot](http://d.pr/e
 
 Requires iOS SDK 4.0 or higher
 
-
 How to use
 ----------
 
 * Copy class files into your project
 * Add QuartzCore.framework to your project's linked libraries
 * Import `ALToastView.h` and call static `toastInView:withText:` for every new toast message you want to show, e.g in your `UIViewController` subclass call `[ALToastView toastInView:self.view withText:@"Hello ALToastView"];`
+
+Change log
+----------
+* May 1, 2012: Converted for ARC.

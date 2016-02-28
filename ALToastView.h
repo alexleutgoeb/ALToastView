@@ -32,5 +32,8 @@
 }
 
 + (void)toastInView:(UIView *)parentView withText:(NSString *)text;
++ (void)toastInView:(UIView *)parentView withText:(NSString *)text andBackgroundColor:(UIColor *)backgroundColor;
++ (void)toastInView:(UIView *)parentView withText:(NSString *)text andDuration:(int)duration;
++ (void)toastInView:(UIView *)parentView withText:(NSString *)text andBackgroundColor:(UIColor *)backgroundColor andDuration:(int)duration;
 
 @end

@@ -199,7 +199,7 @@ static NSMutableArray *toasts;
                              toasts = nil;
                          }
                          else
-                             [ALToastView nextToastInView:parentView withDuration:self.duration];
+                             [ALToastView nextToastInView:parentView withDuration:[(ALToastView *)[toasts objectAtIndex:0] duration]];
                      }];
 }
 

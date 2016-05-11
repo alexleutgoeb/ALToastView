@@ -85,11 +85,6 @@ static NSMutableArray *toasts;
 }
 
 
-- (void)dealloc {
-	[_textLabel release];
-  
-	[super dealloc];
-}
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -98,7 +93,7 @@ static NSMutableArray *toasts;
 + (void)toastInView:(UIView *)parentView withText:(NSString *)text {
 	// Add new instance to queue
 	ALToastView *view = [[ALToastView alloc] initWithText:text];
-  
+    
 	CGFloat lWidth = view.textLabel.frame.size.width;
 	CGFloat lHeight = view.textLabel.frame.size.height;
 	CGFloat pWidth = parentView.frame.size.width;
@@ -117,7 +112,6 @@ static NSMutableArray *toasts;
 		[toasts addObject:view];
 	}
 	
-  [view release];
 }
 
 
@@ -126,41 +120,40 @@ static NSMutableArray *toasts;
 
 - (void)fadeToastOut {
 	// Fade in parent view
-  [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionAllowUserInteraction
-   
-                   animations:^{
-                     self.alpha = 0.f;
-                   } 
-                   completion:^(BOOL finished){
-                     UIView *parentView = self.superview;
-                     [self removeFromSuperview];
-                     
-                     // Remove current view from array
-                     [toasts removeObject:self];
-                     if ([toasts count] == 0) {
-                       [toasts release];
-                       toasts = nil;
-                     }
-                     else
-                       [ALToastView nextToastInView:parentView];
-                   }];
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionAllowUserInteraction
+     
+                     animations:^{
+                         self.alpha = 0.f;
+                     } 
+                     completion:^(BOOL finished){
+                         UIView *parentView = self.superview;
+                         [self removeFromSuperview];
+                         _textLabel = nil;
+                         // Remove current view from array
+                         [toasts removeObject:self];
+                         if ([toasts count] == 0) {
+                             toasts = nil;
+                         }
+                         else
+                             [ALToastView nextToastInView:parentView];
+                     }];
 }
 
 
 + (void)nextToastInView:(UIView *)parentView {
 	if ([toasts count] > 0) {
-    ALToastView *view = [toasts objectAtIndex:0];
-    
+        ALToastView *view = [toasts objectAtIndex:0];
+        
 		// Fade into parent view
 		[parentView addSubview:view];
-    [UIView animateWithDuration:.5  delay:0 options:UIViewAnimationOptionAllowUserInteraction
-                     animations:^{
-      view.alpha = 1.0;
-                     } completion:^(BOOL finished){}];
-    
-    // Start timer for fade out
-    [view performSelector:@selector(fadeToastOut) withObject:nil afterDelay:kDuration];
-  }
+        [UIView animateWithDuration:.5  delay:0 options:UIViewAnimationOptionAllowUserInteraction
+                         animations:^{
+                             view.alpha = 1.0;
+                         } completion:^(BOOL finished){}];
+        
+        // Start timer for fade out
+        [view performSelector:@selector(fadeToastOut) withObject:nil afterDelay:kDuration];
+    }
 }
 
 @end
